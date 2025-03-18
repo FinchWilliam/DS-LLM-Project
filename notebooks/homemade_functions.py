@@ -17,6 +17,19 @@ import random
 
 f1 = evaluate.load("f1")
 accuracy = evaluate.load("accuracy")
+# config variables:
+id2label = {
+    0: "NEGATIVE",
+    1: "NEUTRAL",
+    2: "POSITIVE",
+}
+label2id = {
+    "NEGATIVE": 0,
+    "NEUTRAL": 1,
+    "POSITIVE": 2
+}
+
+
 
 def accuracy_scorer(y_true, y_pred, average='weighted'):
   """
@@ -179,8 +192,6 @@ def remap_labels(example):
         example['label'] = 2
     return example
 
-def preprocess_function(examples, tokenizer):
-    return tokenizer(examples['text'], truncation=True)
 
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
