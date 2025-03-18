@@ -110,14 +110,6 @@ We are going to run Bowl of Words and TFIDF methods of representation on our tex
 - Taking the best model from the hyperparameter training we fine tuned it on the entire dataset with the same settings it was originally trained on creating our final model which we have stored on [hugging face](https://huggingface.co/FinchW/my-yelp-sentiment-model-finetuned)
 
 ## [5-Deployment](notebooks/5-deployment.ipynb)
- - Concerns:
-    - Privacy concerns
-        - dataanonymization techniques
-        - differential privacy
-        - transparent data usage policies
-    - data Quality
-    - model evaluation
-    - memory management
 
 |   Metric | Values   |
 |----------|----------|
@@ -132,5 +124,7 @@ We are going to run Bowl of Words and TFIDF methods of representation on our tex
 ![Confusion Matrix for final model](images/final_confusion.png)
 
 ## Future Plans
- - Future plans for this project is to run back through and seperate my functions file out into more aptly grouped selections (Global variables, cleaning functions, LLM functions, etc.)
+ - Seperate my functions file out into more aptly grouped selections (Global variables, cleaning functions, LLM functions, etc.)
+ - Set up an API that would be able to link directly into yelp and on using the name of a restaurant return the latest X number of reviews (or all reviews since X date)
+ - Potentially link in another model to write appropriate responses to the reviews (with human oversight)
 
