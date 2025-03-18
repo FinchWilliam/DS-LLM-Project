@@ -1,9 +1,13 @@
-# Large Language Model Project Journal
+# Large Language Model Project J
 
  - Our mission is to build a Large Language Model that can detect a Positive, Neutral, and Negative sentiment from a yelp review, and compare the results it produces against more mundane methods, including:
     1. Logistic regression models
     2. A pre-trained model built by someone else.
  - We are also looking at the different ways text can be represented in a system for these models.
+ - View my presentation [here](https://youtu.be/1_XvFe_vFLY)
+
+
+ Important note, the data-files are quite large so have been kept out of this git, they are easily reproducable using the code in the notebooks and the [yelp](https://huggingface.co/datasets/Yelp/yelp_review_full) dataset on huggingface
 
 ## [1-preprocessing.ipynb](notebooks/1-preprocessing.ipynb)
  
@@ -33,14 +37,13 @@ We are going to run Bowl of Words and TFIDF methods of representation on our tex
     - After many differing attempts i settled on 50000 rows and 10000 features for tfidf and ran several different models with varying levels of terribleness
  - we also see that the resultss are MUCH better on our regular networks than our basic neural network so we wouldn't need from this set-up 
 
- ### Day 2 model Metrics -- Lemmatized words
+ #### Day 2 model Metrics -- Lemmatized words
 ![Image of the various metrics from my initial models](images/initial_models_metrics.png)
 
-
-### Day 2 model confusion matrices
+#### Day 2 model confusion matrices
 ![Image of the various confusion matrix heatmaps](images/intial_models_confusion_maps.png)
 
-### Day 3 comparison of the different techniques (lemmatized, stemmed, cleaned)
+#### Day 2 comparison of the different techniques (lemmatized, stemmed, cleaned)
  - Taken from the averages of each model 
 ![Grouped bar chart showing the averages of the different techniques](images/initial_models_metrics_avgs.png)
 
@@ -71,11 +74,13 @@ We are going to run Bowl of Words and TFIDF methods of representation on our tex
 | Recall   | 0.68852  |
 | F1       | 0.65835  |
 
+![Image of the Metrics for the pre-trained model](images/pre-trained_metrics.png)
 ![Image of the confusion matrix for the pre-trained model](images/pre-trained_confusion_matrix.png)
+
 
 ![image of the distributions of the results from the pre-trained model](images/pre-trained_distributions.png)
 
-![Image of the Metrics for the pre-trained model](images/pre-trained_metrics.png)
+
 
 ## [4-Optimization](notebooks/4-optimization.ipynb)
  
@@ -114,4 +119,18 @@ We are going to run Bowl of Words and TFIDF methods of representation on our tex
     - model evaluation
     - memory management
 
+|   Metric | Values   |
+|----------|----------|
+| accuracy | 0.848460 |
+| r2       | 0.781700 |
+| mse      | 0.174640 |
+| precision| 0.850746 |
+| recall   | 0.848460 |
+| f1       | 0.849493 |
+
+![Metrics for final model](images/final_metrics.png)
+![Confusion Matrix for final model](images/final_confusion.png)
+
+## Future Plans
+ - Future plans for this project is to run back through and seperate my functions file out into more aptly grouped selections (Global variables, cleaning functions, LLM functions, etc.)
 

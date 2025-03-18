@@ -18,16 +18,7 @@ import random
 f1 = evaluate.load("f1")
 accuracy = evaluate.load("accuracy")
 # config variables:
-id2label = {
-    0: "NEGATIVE",
-    1: "NEUTRAL",
-    2: "POSITIVE",
-}
-label2id = {
-    "NEGATIVE": 0,
-    "NEUTRAL": 1,
-    "POSITIVE": 2
-}
+
 
 
 
@@ -40,7 +31,7 @@ def accuracy_scorer(y_true, y_pred, average='weighted'):
         y_pred(array): predicted results
 
     Returns:
-        accuracy, r2, mse, precision, recall, f1, conf_matrix
+        [accuracy, r2, mse, precision, recall, f1], conf_matrix
   """
   metrics = [
       accuracy_score(y_true, y_pred), 
@@ -52,7 +43,6 @@ def accuracy_scorer(y_true, y_pred, average='weighted'):
     ]
   conf_matrix = confusion_matrix(y_true, y_pred)
   return metrics, conf_matrix
-
 
 def word_count(text):
     """
@@ -168,9 +158,9 @@ def trunc_analysis(model, text, max_length = 510):
     pred = model(truncated_text)
     return pred
 
-def preprocess_function(tokenizer, text, truncation=True):
+def tokenize_function(tokenizer, text, truncation=True):
     """
-    Preprocess data to tokenize for training
+    Tokenize the data for training of a LLM.
 
     Args:
         tokenizer of choice
@@ -182,7 +172,13 @@ def preprocess_function(tokenizer, text, truncation=True):
     return tokenizer(text['text'], truncation=truncation)
 
 def remap_labels(example):
-    """Remaps labels from 0-4 to 0-2."""
+    """
+    Remaps labels from 0-4 to 0-2.
+    
+    Args:
+        example(int): brings in a list from 0-4 that can be converted to 0-2
+    
+    """
     label = example['label']
     if label in [0, 1]:
         example['label'] = 0
@@ -192,8 +188,10 @@ def remap_labels(example):
         example['label'] = 2
     return example
 
-
 def compute_metrics(eval_pred):
+    """
+    Compute the metrics whilst training the model
+    """
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=1)
     accuracy_results = accuracy.compute(predictions=predictions, references=labels)
@@ -217,7 +215,6 @@ def get_unique_filename(base_filename):
         if not os.path.exists(filename):
             return f"{base_filename}{counter:03d}"
         counter += 1
-
 
 def stratified_dataset(dataset, label_column, sample_size_per_class, seed=42):
     """
